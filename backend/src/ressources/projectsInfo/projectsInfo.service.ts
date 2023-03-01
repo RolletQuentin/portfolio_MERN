@@ -4,7 +4,8 @@ const ProjectInfo = require("../../models/ProjectInfo");
 
 export default class ProjectInfoService {
     async findAll(req: Request, res: Response) {
-        return ProjectInfo.find()
+        return ProjectInfo.find({})
+            .sort({ date: -1 })
             .then((projects: typeof ProjectInfo) =>
                 res.status(200).json({ projects })
             )

@@ -1,31 +1,49 @@
 import { useFetch } from "../../utils/hooks";
 import { Loader } from "../../utils/Atoms";
+import styled from "styled-components";
+import Card from "../../components/Card";
+import { useContext } from "react";
+import { ThemeContext } from "../../utils/context";
+
+const PortfolioContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+`;
+
+const CardsContainer = styled.div`
+    width: 100%;
+`;
 
 function PortfolioInfo() {
     const { data, isLoading, error } = useFetch(
         "http://localhost:8000/api/projectsInfo"
     );
     const { projects } = data;
+    const { themeMode } = useContext(ThemeContext);
 
     if (error) {
         return <div>Oups, il y a un problème</div>;
     }
 
     return (
-        <div>
+        <PortfolioContainer>
             {isLoading ? (
                 <Loader />
             ) : (
-                <div>
+                <CardsContainer>
                     {projects.map((project) => (
-                        <div key={`${project._id}`}>
-                            <h1>{project.title}</h1>
-                            <p>{project.description}</p>
-                        </div>
+                        <Card
+                            key={`${project._id}`}
+                            title={project.title}
+                            description={project.description}
+                            coverPicture={project.coverPicture}
+                            themeMode={themeMode}
+                        />
                     ))}
-                </div>
+                </CardsContainer>
             )}
-        </div>
+        </PortfolioContainer>
     );
 }
 
