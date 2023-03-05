@@ -54,6 +54,9 @@ function Header() {
                 <StyledLink to="aboutMe" thememode={themeMode}>
                     À propos
                 </StyledLink>
+                <StyledLink to="admin" thememode={themeMode}>
+                    ADMIN
+                </StyledLink>
             </StyledNavbar>
             <StyledOptionsButton>
                 <DarkLightButton />

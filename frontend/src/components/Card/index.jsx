@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import DefaultPicture from "../../asset/datacenter_server.jpg";
+import { Link } from "react-router-dom";
 
-const CardWrapper = styled.div`
+const CardWrapper = styled(Link)`
     display: flex;
     background-color: ${(props) => props.thememode.backgroundLight};
+    color: ${(props) => props.thememode.text};
+    text-decoration: none;
     transition: 200ms;
     width: 100%;
     height: 150px;
@@ -27,9 +30,9 @@ const CardText = styled.div`
     padding: 10px;
 `;
 
-function Card({ title, description, coverPicture, themeMode }) {
+function Card({ id, title, description, coverPicture, themeMode }) {
     return (
-        <CardWrapper thememode={themeMode}>
+        <CardWrapper thememode={themeMode} to={id}>
             <CardImage src={coverPicture} />
             <CardText>
                 <h1>{title}</h1>

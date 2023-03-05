@@ -19,6 +19,7 @@ function PortfolioInfo() {
     const { data, isLoading, error } = useFetch(
         "http://localhost:8000/api/projectsInfo"
     );
+    console.log(data);
     const { projects } = data;
     const { themeMode } = useContext(ThemeContext);
 
@@ -35,6 +36,7 @@ function PortfolioInfo() {
                     {projects.map((project) => (
                         <Card
                             key={`${project._id}`}
+                            id={project._id}
                             title={project.title}
                             description={project.description}
                             coverPicture={project.coverPicture}

@@ -1,44 +1,44 @@
 import { Request, Response } from "express";
 
-const ProjectInfo = require("../../models/ProjectInfo");
+const Formation = require("../../models/Formation");
 
-export default class ProjectInfoService {
+export default class FormationService {
     async findAll(req: Request, res: Response) {
-        return ProjectInfo.find({})
+        return Formation.find({})
             .sort({ date: -1 })
-            .then((projects: typeof ProjectInfo) =>
-                res.status(200).json({ projects })
+            .then((formations: typeof Formation) =>
+                res.status(200).json({ formations })
             )
             .catch((error: any) => res.status(400).json({ error }));
     }
 
     async create(req: Request, res: Response) {
         delete req.body._id;
-        const project = new ProjectInfo({ ...req.body });
-        return project
+        const formation = new Formation({ ...req.body });
+        return formation
             .save()
-            .then((project: typeof ProjectInfo) =>
-                res.status(201).json({ project })
+            .then((formation: typeof Formation) =>
+                res.status(201).json({ formation })
             )
             .catch((error: any) => res.status(400).json({ error }));
     }
 
     async findOne(req: Request, res: Response) {
-        return ProjectInfo.findOne({ _id: req.params.id })
-            .then((project: typeof ProjectInfo) =>
-                res.status(200).json({ project })
+        return Formation.findOne({ _id: req.params.id })
+            .then((formation: typeof Formation) =>
+                res.status(200).json({ formation })
             )
             .catch((error: any) => res.status(404).json({ error }));
     }
 
     async delete(req: Request, res: Response) {
-        return ProjectInfo.deleteOne({ _id: req.params.id })
+        return Formation.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: "Object deleted" }))
             .catch((error: any) => res.status(400).json({ error }));
     }
 
     async modifyOne(req: Request, res: Response) {
-        return ProjectInfo.updateOne(
+        return Formation.updateOne(
             { _id: req.params.id },
             { ...req.body, _id: req.params.id }
         )

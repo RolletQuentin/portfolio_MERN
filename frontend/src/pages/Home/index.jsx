@@ -15,6 +15,7 @@ const HomeContainer = styled.div`
         text-decoration: none;
         color: ${(props) => props.thememode.text};
         display: flex;
+        align-items: center;
         text-align: justify;
         margin: 50px;
         padding: 50px;

@@ -8,6 +8,8 @@ import PortfolioArt from "./pages/PortfolioArt";
 import PortfolioInfo from "./pages/PortfolioInfo";
 import Formation from "./pages/Formation";
 import AboutMe from "./pages/AboutMe";
+import Admin from "./pages/Admin";
+import ProjectInfo from "./pages/ProjectInfo";
 
 function App() {
     return (
@@ -18,9 +20,11 @@ function App() {
                 <Routes>
                     <Route exact path="" element={<Home />} />
                     <Route path="portfolioInfo" element={<PortfolioInfo />} />
+                    <Route path="portfolioInfo/:id" element={<ProjectInfo />} />
                     <Route path="portfolioArt" element={<PortfolioArt />} />
                     <Route path="formation" element={<Formation />} />
                     <Route path="aboutMe" element={<AboutMe />} />
+                    <Route path="admin" element={<Admin />} />
                 </Routes>
                 <Footer />
             </ThemeProvider>
