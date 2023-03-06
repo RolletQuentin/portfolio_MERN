@@ -2,6 +2,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import DefaultPicture from "../../asset/datacenter_server.jpg";
 import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../utils/context";
 
 const CardWrapper = styled(Link)`
     display: flex;
@@ -31,6 +33,32 @@ const CardText = styled.div`
 `;
 
 function Card({ id, title, description, coverPicture, themeMode }) {
+    const { state, token } = useContext(AuthContext);
+    const [error, setError] = useState(null);
+
+    const toggleDelete = async () => {
+        const response = await fetch(
+            `http://localhost:8000/api/projectsInfo/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        const json = await response.json();
+
+        if (!response.ok) {
+            setError(json.error);
+            console.log(error);
+        }
+        if (response.ok) {
+            setError(null);
+        }
+    };
+
     return (
         <CardWrapper thememode={themeMode} to={id}>
             <CardImage src={coverPicture} />
@@ -38,6 +66,11 @@ function Card({ id, title, description, coverPicture, themeMode }) {
                 <h1>{title}</h1>
                 <p>{description}</p>
             </CardText>
+            {state.user !== null ? (
+                <div>
+                    <button onClick={toggleDelete}>🗑️</button>
+                </div>
+            ) : null}
         </CardWrapper>
     );
 }

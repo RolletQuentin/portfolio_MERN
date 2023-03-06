@@ -52,7 +52,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use("/api/projectsInfo", ProjectsInfoController);
 app.use("/api/projectsArt", ProjectsArtController);
 app.use("/api/formation", FormationController);
-app.use("api/auth", AdminController);
+app.use("/api/auth", AdminController);
 
 // Pour toute les routes non définie, on renvoie une erreur
 app.all("*", UnknownRoutesHandler);

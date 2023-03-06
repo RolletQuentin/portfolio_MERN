@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../utils/context";
 
 function FormProjectsArt() {
     const [name, setName] = useState("");
@@ -6,6 +7,7 @@ function FormProjectsArt() {
     const [coverPicture, setCoverPicture] = useState("");
     const [formationLink, setFormationLink] = useState("");
     const [error, setError] = useState(null);
+    const { token } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,6 +23,7 @@ function FormProjectsArt() {
             method: "POST",
             body: JSON.stringify(project),
             headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../utils/context";
 
 function FormFormation() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [formationLink, setFormationLink] = useState("");
     const [error, setError] = useState(null);
+    const { token } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,6 +21,7 @@ function FormFormation() {
             method: "POST",
             body: JSON.stringify(formation),
             headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });

@@ -15,7 +15,7 @@ const projectSchema = new Schema<ProjectInfo>({
     description: { type: String, required: true },
     content: { type: String, required: true },
     coverPicture: { type: String, required: true },
-    date: { type: Date, default: Date.now, required: true },
+    date: { type: Date, default: Date.now, required: false },
     githubLink: { type: String, required: false },
     websiteLink: { type: String, required: false },
 });

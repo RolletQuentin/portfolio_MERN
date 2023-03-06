@@ -31,3 +31,25 @@ export const ThemeProvider = ({ children }) => {
         </ThemeContext.Provider>
     );
 };
+
+// ------------------------------ Auth Context ---------------------------------------
+
+export const AuthContext = createContext();
+
+export const AuthContextProvider = ({ children }) => {
+    const [state, setState] = useState({ user: null });
+    const [token, setToken] = useState("");
+
+    useEffect(() => {
+        const localState = window.localStorage.getItem("user");
+        const localToken = window.localStorage.getItem("token");
+        localState ? setState(localState) : setState({ user: null });
+        localToken ? setToken(localToken) : setToken("");
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ state, setState, token, setToken }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../utils/context";
 
 function ProjectInfoForm() {
     const [title, setTitle] = useState("");
@@ -9,6 +10,7 @@ function ProjectInfoForm() {
     const [githubLink, setGithubLink] = useState("");
     const [websiteLink, setWebsiteLink] = useState("");
     const [error, setError] = useState(null);
+    const { token } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,11 +24,12 @@ function ProjectInfoForm() {
             githubLink,
             websiteLink,
         };
-
+        console.log(token);
         const response = await fetch("http://localhost:8000/api/projectsInfo", {
             method: "POST",
             body: JSON.stringify(project),
             headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });
